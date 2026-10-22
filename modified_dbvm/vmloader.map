@@ -1,0 +1,200 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+LOGOlocation        0x2               vmloaderc.o
+VMMlocation         0x2               vmloaderc.o
+
+Discarded input sections
+
+ .group         0x00000000        0x8 vmloaderc.o
+ .group         0x00000000        0x8 ../common/common.o
+ .group         0x00000000        0x8 ../common/common.o
+ .text.__x86.get_pc_thunk.bx
+                0x00000000        0x4 ../common/common.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+
+.text           0x00030000     0x3219
+ *(.text)
+ .text          0x00030000      0x667 vmloader.o
+                0x00030000                amain
+                0x00030120                reservedmem_listcount
+                0x00030124                readerror
+                0x00030128                sectorsread
+                0x0003012c                a20state
+                0x00030130                bootdisk
+                0x00030134                SectorsPerTrack
+                0x00030138                NumberOfHeads
+                0x0003013c                NumberOfCylinders
+                0x000304de                PageMapLevel4
+                0x000304e2                vmmPA
+                0x000304e6                GDTVA
+                0x000304ea                gotoVMM
+                0x00030556                halt
+                0x00030559                readsectorasm
+ .text          0x00030667     0x1382 vmloaderc.o
+                0x00030667                readsector
+                0x00030755                _vmloader_main
+ .text          0x000319e9     0x1776 ../common/common.o
+                0x000319e9                vbuildstring
+                0x000321bd                sendstring
+                0x0003222f                sendstringf
+                0x000322ee                getAPICID
+                0x0003232b                csEnter
+                0x00032394                csLeave
+                0x000323f2                zeromemory
+                0x0003242c                zeromemoryd
+                0x00032496                copymem
+                0x000324e0                strlen
+                0x00032518                strcat
+                0x0003257b                strcpy
+                0x000325d3                appendzero
+                0x000326c0                power
+                0x00032708                atoi
+                0x00032916                itoa
+                0x00032a66                sendchar
+                0x00032a7f                waitforkeypress
+                0x00032abb                getchar
+                0x00032acf                waitforchar
+                0x00032af9                readstring
+                0x00032bec                printchar
+                0x00032ca8                getdisplaychar
+                0x00032ce7                printstring
+                0x00032d93                movelinesup
+                0x00032e61                nextline
+                0x00032eab                updateCursor
+                0x00032f35                displayline
+                0x00033089                generateCRC
+                0x000330d5                showstatec
+ *fill*         0x0003315f        0x1 
+ .text          0x00033160       0xb9 ../common/commona.o
+                0x00033160                getESP
+                0x00033166                inportb
+                0x0003316f                _cpuid
+                0x000331ac                spinlock
+                0x000331d1                outportb
+                0x000331dd                showstate
+
+.rodata         0x0003321c      0x76e
+ .rodata        0x0003321c      0x714 vmloaderc.o
+ .rodata        0x00033930       0x5a ../common/common.o
+
+.eh_frame       0x0003398c      0x4b8
+ .eh_frame      0x0003398c       0x84 vmloaderc.o
+ .eh_frame      0x00033a10      0x434 ../common/common.o
+                                0x460 (size before relaxing)
+
+.iplt           0x00033e44        0x0
+ .iplt          0x00033e44        0x0 vmloader.o
+
+.text.__x86.get_pc_thunk.bx
+                0x00033e44        0x4
+ .text.__x86.get_pc_thunk.bx
+                0x00033e44        0x4 vmloaderc.o
+                0x00033e44                __x86.get_pc_thunk.bx
+
+.text.__x86.get_pc_thunk.ax
+                0x00033e48        0x4
+ .text.__x86.get_pc_thunk.ax
+                0x00033e48        0x4 ../common/common.o
+                0x00033e48                __x86.get_pc_thunk.ax
+
+.rel.dyn        0x00033e4c        0x0
+ .rel.got       0x00033e4c        0x0 vmloader.o
+ .rel.iplt      0x00033e4c        0x0 vmloader.o
+
+.data           0x00030000        0x0
+ *(.data)
+ .data          0x00030000        0x0 vmloaderc.o
+ .data          0x00030000        0x0 ../common/common.o
+
+.got            0x00033e4c        0x0
+ .got           0x00033e4c        0x0 vmloader.o
+
+.got.plt        0x00033e4c        0xc
+ .got.plt       0x00033e4c        0xc vmloader.o
+                0x00033e4c                _GLOBAL_OFFSET_TABLE_
+
+.igot.plt       0x00033e58        0x0
+ .igot.plt      0x00033e58        0x0 vmloader.o
+
+.bss            0x00033e60      0x148
+ *(.bss)
+ .bss           0x00033e60        0x4 vmloaderc.o
+                0x00033e60                isAP
+ *fill*         0x00033e64       0x1c 
+ .bss           0x00033e80      0x124 ../common/common.o
+                0x00033e80                nosendchar
+                0x00033f80                currentdisplayline
+                0x00033f84                currentdisplayrow
+                0x00033f88                sendstringfCS
+                0x00033f94                sendstringCS
+                0x00033fa0                debugzeromem
+ COMMON         0x00033fa4        0x4 vmloaderc.o
+                0x00033fa4                LOGOlocation
+                0x00033fa6                VMMlocation
+LOAD vmloader.o
+LOAD vmloaderc.o
+LOAD ../common/common.o
+LOAD ../common/commona.o
+OUTPUT(../vmloader.elf elf32-i386)
+
+.debug_line     0x00000000     0x1228
+ .debug_line    0x00000000      0x203 vmloader.o
+ .debug_line    0x00000203      0x584 vmloaderc.o
+ .debug_line    0x00000787      0xa0b ../common/common.o
+ .debug_line    0x00001192       0x96 ../common/commona.o
+
+.debug_abbrev   0x00000000      0x47d
+ .debug_abbrev  0x00000000       0x14 vmloader.o
+ .debug_abbrev  0x00000014      0x1ba vmloaderc.o
+ .debug_abbrev  0x000001ce      0x29b ../common/common.o
+ .debug_abbrev  0x00000469       0x14 ../common/commona.o
+
+.debug_info     0x00000000     0x13a0
+ .debug_info    0x00000000       0x5b vmloader.o
+ .debug_info    0x0000005b      0x68b vmloaderc.o
+ .debug_info    0x000006e6      0xc62 ../common/common.o
+ .debug_info    0x00001348       0x58 ../common/commona.o
+
+.debug_aranges  0x00000000       0x80
+ .debug_aranges
+                0x00000000       0x20 vmloader.o
+ .debug_aranges
+                0x00000020       0x20 vmloaderc.o
+ .debug_aranges
+                0x00000040       0x20 ../common/common.o
+ .debug_aranges
+                0x00000060       0x20 ../common/commona.o
+
+.debug_str      0x00000000      0x683
+ .debug_str     0x00000000      0x683 vmloaderc.o
+                                0x3ab (size before relaxing)
+ .debug_str     0x00000683      0x40a ../common/common.o
+
+.debug_line_str
+                0x00000000       0x76
+ .debug_line_str
+                0x00000000       0x76 vmloaderc.o
+                                 0x87 (size before relaxing)
+ .debug_line_str
+                0x00000076       0x70 ../common/common.o
+
+.comment        0x00000000       0x1f
+ .comment       0x00000000       0x1f vmloaderc.o
+                                 0x20 (size before relaxing)
+ .comment       0x0000001f       0x20 ../common/common.o
+
+.note.GNU-stack
+                0x00000000        0x0
+ .note.GNU-stack
+                0x00000000        0x0 vmloaderc.o
+ .note.GNU-stack
+                0x00000000        0x0 ../common/common.o

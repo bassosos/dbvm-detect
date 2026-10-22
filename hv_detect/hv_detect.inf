@@ -1,0 +1,62 @@
+;
+; hv_detect.inf
+;
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = System ; TODO: specify appropriate Class
+ClassGuid   = {4d36e97d-e325-11ce-bfc1-08002be10318} ; TODO: specify appropriate ClassGuid
+Provider    = %ManufacturerName%
+CatalogFile = hv_detect.cat
+DriverVer   = ; TODO: set DriverVer in stampinf property pages
+PnpLockdown = 1
+
+[DestinationDirs]
+DefaultDestDir = 13
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+hv_detect.sys = 1,,
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName% = Standard,NT$ARCH$.10.0...16299 ; %13% support introduced in build 16299
+
+[Standard.NT$ARCH$.10.0...16299]
+%hv_detect.DeviceDesc% = hv_detect_Device, Root\hv_detect ; TODO: edit hw-id
+
+[hv_detect_Device.NT]
+CopyFiles = File_Copy
+
+[File_Copy]
+hv_detect.sys
+
+;-------------- Service installation
+[hv_detect_Device.NT.Services]
+AddService = hv_detect,%SPSVCINST_ASSOCSERVICE%, hv_detect_Service_Inst
+
+; -------------- hv_detect driver install sections
+[hv_detect_Service_Inst]
+DisplayName    = %hv_detect.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %13%\hv_detect.sys
+
+[hv_detect_Device.NT.Wdf]
+KmdfService = hv_detect, hv_detect_wdfsect
+
+[hv_detect_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE = 0x00000002
+ManufacturerName = "<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+DiskName = "hv_detect Installation Disk"
+hv_detect.DeviceDesc = "hv_detect Device"
+hv_detect.SVCDESC = "hv_detect Service"
